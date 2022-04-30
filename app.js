@@ -14,7 +14,7 @@ $(window).on("load", setTheme());
 $(".logo").hover(function() {
     $("#themeNotify").toggleClass('active')
 });
-$.getJSON(`https://localmonero.co/blocks/api/get_stats`, function(initialize) {
+$.getJSON(`https://explorer.clericiproject.com/blocks/api/get_stats`, function(initialize) {
     height = initialize.height;
     hashrate = initialize.hashrate;
     Math.trunc(hashrate);
@@ -42,7 +42,7 @@ $.getJSON(`https://localmonero.co/blocks/api/get_stats`, function(initialize) {
         }
     };
     const blockHeight = async id => {
-        const url = `https://monero.mycryptoapi.com/api/block/${id}`;
+        const url = `https://explorer.clericiproject.com/api/block/${id}`;
         const data = await fetch(url);
         const block = await data.json();
 
@@ -62,7 +62,7 @@ function showBlock(blockInput) {
         await blockData(blockInput);
     };
     const blockData = async blockInput => {
-        const url2 = `https://monero.mycryptoapi.com/api/block/${blockInput}`;
+        const url2 = `https://explorer.clericiproject.com/api/block/${blockInput}`;
         const data2 = await fetch(url2);
         const block2 = await data2.json();
         var temp;
@@ -93,7 +93,7 @@ function showTx(txInput) {
         await txData(txInput);
     };
     const txData = async txInput => {
-        const url3 = `https://monero.mycryptoapi.com/api/transaction/${txInput}`;
+        const url3 = `https://explorer.clericiproject.com/api/transaction/${txInput}`;
         const data3 = await fetch(url3);
         const block3 = await data3.json();
         document.getElementById("grid-item-tx-txHash").innerHTML = txInput;
@@ -211,13 +211,13 @@ $(window).scroll(function() {
 function search(ele) {
     if (event.key === 'Enter') {
         var inputText = ele.value.trim();
-        $.getJSON(`https://monero.mycryptoapi.com/api/block/${inputText}`, function(block) {
+        $.getJSON(`https://explorer.clericiproject.com/api/block/${inputText}`, function(block) {
             if (block.data.hash != undefined) {
                 removeTxList();
                 showBlock(`${inputText}`);
                 temp();
             } else {
-                $.getJSON(`https://monero.mycryptoapi.com/api/transaction/${inputText}`, function(block2) {
+                $.getJSON(`https://explorer.clericiproject.com/api/transaction/${inputText}`, function(block2) {
                     if (block2.data.confirmations != undefined) {
                         $('#grid-container-tx-section5').remove();
                         $('#grid-container-tx-section7').remove();
